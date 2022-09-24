@@ -1,0 +1,14 @@
+[Unit]
+Description=logmon
+After=getty.target
+
+[Service]
+Type=simple
+User=root
+Group=root
+Restart=always
+ExecStart=/usr/local/logmon/bin/logmon.pl -f /usr/local/logmon/etc/logmon.conf
+TimeoutSec=0
+
+[Install]
+WantedBy=multi-user.target

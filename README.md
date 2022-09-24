@@ -1,2 +1,5 @@
-logmon
-======
+# logmon
+## Installation
+```
+sudo ./setup.sh
+```

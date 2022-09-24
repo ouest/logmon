@@ -1,12 +1,4 @@
 #!/usr/bin/perl
-#
-#   logmon.pl / LogMonitor
-#
-#   2009/06/26  ver1.0
-#   2009/06/30  ver1.1 Add meta-string: <%%%%> 
-#   2010/04/11  ver1.2 resolve meta-string substitution bug
-#
-
 use strict;
 use Getopt::Std;
 
@@ -26,14 +18,14 @@ sub catch_term {
 sub options {
 my %opts;
     getopts ( "hcf:", \%opts );
-    $Conf_file = $opts{'f'} || "/etc/logmon/logmon.conf";
+    $Conf_file = $opts{'f'} ||  '/usr/local/logmon/etc/logmon.conf';
     if ( $opts{'h'} ) {
         print <<EOF;
 Usage: logmon [-hc] [-f config_file]
 Options:
     -h: show help
     -c: check config
-    -f: config file (Default: /etc/logmon/logmon.conf)
+    -f: config file (Default: /usr/local/logmon/etc/logmon.conf)
 EOF
         exit 0;
     }

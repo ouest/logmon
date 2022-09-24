@@ -1,14 +1,20 @@
-#!/bin/sh -x
+#!/bin/sh
 
-mkdir -p /etc/logmon
-cp ./logmon.pl /etc/logmon/
-cp ./logmon.conf /etc/logmon/
-cp ./logmon /etc/init.d/logmon
+if [ $(id -u) -ne 0 ]; then
+  echo "Usage: sudo $0" 1>&2
+  exit 1
+fi
 
-chmod 700 /etc/init.d/logmon
-chmod 700 /etc/logmon/logmon.pl
-chmod 600 /etc/logmon/logmon.conf
+mkdir -p /usr/local/logmon/bin \
+&& mkdir -p /usr/local/logmon/etc \
+&& mkdir -p /usr/local/logmon/etc \
+&& cp ./logmon.pl /usr/local/logmon/bin/ \
+&& cp ./logmon.conf /usr/local/logmon/etc/ \
+&& chmod 700 /usr/local/logmon/bin/logmon.pl \
+&& chmod 600 /usr/local/logmon/etc/logmon.conf \
+&& cp ./logmon.service /etc/systemd/system/logmon.service \
+&& systemctl daemon-reload \
+&& systemctl start logmon.service \
+&& systemctl enable logmon.service
 
-chkconfig --add logmon
-chkconfig --level 345 logmon on
-
+exit 0
